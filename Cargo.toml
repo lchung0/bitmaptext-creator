@@ -16,6 +16,7 @@ keywords = [
   "texture-atlas",
 ]
 categories = ["command-line-utilities", "game-development", "graphics"]
+exclude = ["examples/"]
 
 [dependencies]
 image = { version = "0.25", default-features = false, features = ["png"] }
