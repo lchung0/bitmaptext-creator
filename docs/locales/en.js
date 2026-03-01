@@ -49,6 +49,6 @@ const en = {
             { name: 'rectangle-pack', desc: 'Rectangle packing algorithm' }
         ]
     },
-    footer: '© 2024 BitmapFont Creator',
+    footer: '© 2026 BitmapFont Creator',
     langName: 'English'
 };

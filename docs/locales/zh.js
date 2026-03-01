@@ -49,6 +49,6 @@ const zh = {
             { name: 'rectangle-pack', desc: '矩形打包算法' }
         ]
     },
-    footer: '© 2024 BitmapFont Creator',
+    footer: '© 2026 BitmapFont Creator',
     langName: '中文'
 };
