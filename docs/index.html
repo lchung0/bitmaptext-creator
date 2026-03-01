@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BitmapFont Creator — Phaser 位图字体生成工具</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">
+                <div class="logo-icon">🦀</div>
+                <span>BitmapFont Creator</span>
+            </a>
+            <div class="nav-right">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#features" data-i18n="nav.features">功能</a></li>
+                    <li><a href="#workflow" data-i18n="nav.workflow">流程</a></li>
+                    <li><a href="#code" data-i18n="nav.code">示例</a></li>
+                    <li><a href="https://github.com/lchung0/bitmaptext-creator" data-i18n="nav.github">GitHub</a></li>
+                </ul>
+                <div class="lang-switcher" id="langSwitcher">
+                    <button class="lang-btn" id="langBtn">
+                        <span>🌐</span>
+                        <span id="currentLang">中文</span>
+                        <span>▼</span>
+                    </button>
+                    <div class="lang-dropdown">
+                        <div class="lang-option active" data-lang="zh">
+                            <span>🇨🇳</span>
+                            <span>中文</span>
+                            <span class="check">✓</span>
+                        </div>
+                        <div class="lang-option" data-lang="en">
+                            <span>🇺🇸</span>
+                            <span>English</span>
+                            <span class="check">✓</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span data-i18n="hero.badge">v0.1.0 现已发布</span>
+                    </div>
+                    <h1>BitmapFont Creator</h1>
+                    <p class="hero-subtitle" data-i18n="hero.subtitle">为 Phaser 游戏开发者打造的高性能位图字体生成工具。用 Rust 编写，快速、可靠、易于集成。</p>
+                    <div class="hero-buttons">
+                        <a href="https://github.com/lchung0/bitmaptext-creator" class="btn btn-primary">
+                            <span>📦</span> <span data-i18n="hero.btnPrimary">安装使用</span>
+                        </a>
+                        <a href="https://crates.io/crates/bitmapfont-creator" class="btn btn-secondary">
+                            <span>📖</span> <span data-i18n="hero.btnSecondary">查看文档</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot yellow"></div>
+                        <div class="terminal-dot green"></div>
+                        <span class="terminal-title">bitmapfont-creator — zsh</span>
+                    </div>
+                    <div class="terminal-body">
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">$</span>
+                            <span class="terminal-command">cargo install bitmapfont-creator</span>
+                        </div>
+                        <div class="terminal-output">
+                            <span class="terminal-comment"># <span data-i18n="terminal.installDone">安装完成</span></span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">$</span>
+                            <span class="terminal-command">bitmapfont-creator --config font.json --output ./dist</span>
+                        </div>
+                        <div class="terminal-output">
+                            <span style="color: var(--accent-green);">✓</span> <span data-i18n="terminal.output1">生成字体纹理</span>: game-font.png<br>
+                            <span style="color: var(--accent-green);">✓</span> <span data-i18n="terminal.output2">生成 XML 描述</span>: game-font.xml<br>
+                            <span style="color: var(--accent-cyan);">→</span> <span data-i18n="terminal.output3">输出目录</span>: ./dist/
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">$</span>
+                            <span class="cursor"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">FEATURES</div>
+                <h2 class="section-title" data-i18n="features.title">核心功能</h2>
+                <p class="section-subtitle" data-i18n="features.subtitle">专为游戏开发工作流设计，提供完整的位图字体解决方案</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3 data-i18n="features.items.0.title">纹理图集生成</h3>
+                    <p data-i18n="features.items.0.desc">自动将多个字符图片智能合并为单个纹理图集，优化渲染性能，减少 draw call</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✂️</div>
+                    <h3 data-i18n="features.items.1.title">精灵表支持</h3>
+                    <p data-i18n="features.items.1.desc">支持从现有精灵表中提取指定帧作为字符，灵活复用已有美术资源</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3 data-i18n="features.items.2.title">智能填充</h3>
+                    <p data-i18n="features.items.2.desc">可配置的字符边距填充，有效防止纹理渗透问题，确保各种缩放下的渲染质量</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <h3 data-i18n="features.items.3.title">Phaser 兼容</h3>
+                    <p data-i18n="features.items.3.desc">生成标准的 XML 字体描述文件，与 Phaser 3 BitmapText 完美兼容</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 data-i18n="features.items.4.title">JSON 输出</h3>
+                    <p data-i18n="features.items.4.desc">同时输出结构化 JSON 数据，便于程序化处理和与其他工具链集成</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 data-i18n="features.items.5.title">高性能</h3>
+                    <p data-i18n="features.items.5.desc">Rust 原生实现，利用并行处理和高效算法，快速处理大量字符资源</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="workflow" id="workflow">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">WORKFLOW</div>
+                <h2 class="section-title" data-i18n="workflow.title">使用流程</h2>
+                <p class="section-subtitle" data-i18n="workflow.subtitle">简单四步，快速集成到您的游戏项目</p>
+            </div>
+            <div class="workflow-grid">
+                <div class="workflow-step">
+                    <div class="step-number">01</div>
+                    <h3 data-i18n="workflow.steps.0.title">准备资源</h3>
+                    <p data-i18n="workflow.steps.0.desc">准备各字符的 PNG 图片文件，或整理现有精灵表</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">02</div>
+                    <h3 data-i18n="workflow.steps.1.title">配置映射</h3>
+                    <p data-i18n="workflow.steps.1.desc">创建 JSON 配置文件，定义字符与图片的映射关系</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">03</div>
+                    <h3 data-i18n="workflow.steps.2.title">执行生成</h3>
+                    <p data-i18n="workflow.steps.2.desc">运行命令行工具，一键生成字体纹理和描述文件</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">04</div>
+                    <h3 data-i18n="workflow.steps.3.title">集成使用</h3>
+                    <p data-i18n="workflow.steps.3.desc">在 Phaser 中加载生成的字体文件，创建 BitmapText</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="code-section" id="code">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">EXAMPLE</div>
+                <h2 class="section-title" data-i18n="code.title">代码示例</h2>
+                <p class="section-subtitle" data-i18n="code.subtitle">从配置到集成，完整的实现参考</p>
+            </div>
+            <div class="code-tabs">
+                <button class="code-tab active" data-tab="config" data-i18n="code.tabs.0">配置</button>
+                <button class="code-tab" data-tab="command" data-i18n="code.tabs.1">命令</button>
+                <button class="code-tab" data-tab="phaser" data-i18n="code.tabs.2">Phaser</button>
+            </div>
+            <div class="code-block">
+                <pre id="codeContent"></pre>
+            </div>
+        </div>
+    </section>
+
+    <section class="tech-stack">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">TECH STACK</div>
+                <h2 class="section-title" data-i18n="tech.title">技术栈</h2>
+                <p class="section-subtitle" data-i18n="tech.subtitle">基于现代 Rust 生态构建</p>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">🦀</div>
+                    <div class="tech-info">
+                        <h4>Rust</h4>
+                        <p data-i18n="tech.items.0.desc">系统编程语言</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🖼️</div>
+                    <div class="tech-info">
+                        <h4>image</h4>
+                        <p data-i18n="tech.items.1.desc">图像处理库</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">📋</div>
+                    <div class="tech-info">
+                        <h4>serde</h4>
+                        <p data-i18n="tech.items.2.desc">序列化框架</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">⚙️</div>
+                    <div class="tech-info">
+                        <h4>clap</h4>
+                        <p data-i18n="tech.items.3.desc">CLI 解析器</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">📦</div>
+                    <div class="tech-info">
+                        <h4>rectangle-pack</h4>
+                        <p data-i18n="tech.items.4.desc">矩形打包算法</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p><span data-i18n="footer">© 2024 BitmapFont Creator</span> · <a href="https://github.com/lchung0/bitmaptext-creator">GitHub</a> · MIT License</p>
+        </div>
+    </footer>
+
+    <script src="locales/zh.js"></script>
+    <script src="locales/en.js"></script>
+    <script src="i18n.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
